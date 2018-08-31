@@ -1,4 +1,4 @@
-# Convenient data management functions for Google Colaboratory.
+# Simple data management functions for Google Colab.
 
 ## Usage
 Suppose you have a Google Colab notebook open, then:
@@ -19,4 +19,4 @@ Suppose you have a Google Colab notebook open, then:
     drive = colab_utils.get_gdrive()
     ```
 
-4. Now, you can use the functions (I'll update this README later).
+4. Now, you can use the functions (I will add a demo Colab notebook soon).
