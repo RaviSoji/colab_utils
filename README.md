@@ -1,10 +1,10 @@
-# Minimize boilerplate code for Google's Colaboratory Notebooks
+# Utility functions for Google Colaboratory
 
 __Target Audience__:
 - Users who want [Colab Notebooks + Google Drives] 
-   to work like [Jupyter Notebooks + hard disks] on their local machines.
+   to work like [Jupyter Notebooks + hard disks].
+- Users who don't have time to gamble on learning new APIs.
 - Experienced with writing Python code to manage data and train models.
-- Familiar with Jupyter and/or Colaboratory notebooks.
 
 __Dependencies__
 - A [Google account](https://accounts.google.com/signup)
@@ -14,24 +14,18 @@ __Background__
 1. Skim the \"Working with Python\" and \"System Aliases\" sections in 
     [Colab Overview](https://colab.research.google.com/notebooks/basic_features_overview.ipynb).
 
-2. All files and folders on your Google Drive have two important attributes.
-   - `'title'`: this is what we typically call the `filename` or `basename`.
-   - `'id'`: a unique ID for a specific file or folder. 
-      In order to download anything from Google Drive to the Colab notebook, 
-       you need this ID; 
-       when you upload new files or folders from your Colaboratory to your 
-       Google Drive, each is assigned a unique ID as well.
-      This package also makes getting this information easy.
-
-3. Do not conflate your Colaboratory and Google Drive directory structures.
+2. Do not conflate your Colaboratory and Google Drive directory structures.
    They are separate from one another.
+
+3. Life will be easier if you stick with tracking absolute paths 
+    in your Google Drive and Colaboratory.
 
 ## Setup and Installation
 1. Open your __Colab__ notebook. 
    None of the following code will run in IPython or Jupyter notebook.
 
 2. Set the `Runtime type` for your notebook.
-    - At the top of the page, click `Runtime`. 
+    - At the top of the page, click the `Runtime` tab. 
     - Then, in the drop-down menu, click `Change runtime type`.
     - Set `Runtime type` to `Python 3`.
     - If you want GPU acceleration, which you probably do, 
@@ -59,46 +53,21 @@ __Background__
 
 2. Authenticate your Google Drive object by clicking the link,
     supplying consent, copying the displayed code, 
-    and pasting into the `verification code` field.
+    and pasting it into the `verification code` field.
    Remember to press `<enter>` on your keyboard.
 
 3. Now, you can use this package to do the things you wish were easier to do.
 
 ## Upload (i.e. \"push\") from your Colaboratory to your Google Drive
-(1) Do whatever you would ordinarily do.
-(2) Pick a Google Drive directory and upload!
-
 ``` python
-# Generate some random data for us to save.
-import numpy as np
-data = np.random.randint(0, 100, (10, 10))
-
-# Save data to colaboratory (The same way you would on a local machine).
-import os
-
-colaboratory_data_dir = os.path.join('.', 'data')
-os.mkdir(colaboratory_data_dir)
-
-fname = 'random_data.npy'
-colaboratory_save_path = os.path.join(colaboratory_data_dir, fname)
-np.save(colaboratory_save_path, data)
-
-# Upload your data to Google Drive.
-google_drive_save_dir = 'a_sample_folder'
-colab_utils.push_to_gdrive(drive,
-                           colaboratory_save_path, google_drive_save_dir)
+colab_utils.push_to_gdrive(drive, colaboratory_path, google_drive_directory)
 ```
 
 ## Download (i.e. \"pull\") from your Google Drive to your Colaboratory
 ``` python
-import os
-
-fname = 'random_data.npy'
-google_drive_directory = 'a_sample_folder'
-google_drive_path = os.path.join(google_drive_directory, fname)
-
-colab_utils.pull_from_gdrive(drive, google_drive_path)  # saves to pwd.
+colab_utils.pull_from_gdrive(drive, google_drive_path, colaboratory_directory)
 ```
+
 ## List contents of a directory in your Google Drive
 - The default behavior is to use the root directory of your Google Drive.
   ```
@@ -116,8 +85,11 @@ colab_utils.pull_from_gdrive(drive, google_drive_path)  # saves to pwd.
   Out[2]: {'some_stuff': 'AAAAAAAAAAAAAAAAAAAAAAAAAAA',
            'more_stuff': 'BBBBBBBBBBBBBBBBBBBBBBBBBBB'}
   ```
+- The out put is a dictionary, 
+   where the keys are filenames in the directory and 
+   the values are IDs unique to each file or folder in your Google Drive.
 
-## Get the ID of any directory, file, or path in your Google Drive
+## Get the Google Drie ID of any directory, file, or path in your Google Drive.
 - Default behavior assumes the given path is relative to the root directory.
   ```
   In [1]: colab_utils.get_gdrive_id(drive, 'a_sample_folder/some_stuff')
@@ -131,5 +103,3 @@ colab_utils.pull_from_gdrive(drive, google_drive_path)  # saves to pwd.
   In [2]: colab_utils.get_gdrive_id(drive, 'more_stuff', parent_id)
   Out[2]: 'BBBBBBBBBBBBBBBBBBBBBBBBBBB'
   ```
-- I find that sticking with absolute paths keeps things clear.
-
