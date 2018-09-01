@@ -1,9 +1,9 @@
 # Minimize boilerplate code for Google's Colaboratory Notebooks
 
 __Target Audience__:
-- Researchers and other users who want their [Colab Notebooks + Google Drives] 
-   to work like [Jupyter Notebooks + hard disks] on their local machines, 
-   without wasting time.
+- Users who want [Colab Notebooks + Google Drives] 
+   to work like [Jupyter Notebooks + hard disks] 
+   on their local machines, without having to learn more APIs.
 - Experienced with writing Python code to manage data and train models.
 - Familiar with Jupyter and/or Colaboratory notebooks.
 
@@ -38,7 +38,7 @@ __Background__
 
 2. Clone and import this package by running the following.
     ```
-    !git clone https://github.com/RaviSoji/colab_utils.git
+    !git clone https://github.com/RaviSoji/colab_utils.git  # Don't forget "!".
     import colab_utils
     ```
 
@@ -47,14 +47,13 @@ __Background__
     drive = colab_utils.get_gdrive()
     ```
 
-    - Running this will display something like the following:
+    - Running this should display something like the following:
        ```
        Go to the following link in your browser:
-   
        https://accounts.google.com/o/oauth2/auth?redirectXXXXXXXXXXXXXXXXX
-   
        Enter verification code: ___________________
        ```
+
 4. Authenticate your Google Drive object by clicking the link,
     supplying consent, copying the displayed code, 
     and pasting into the `verification code` field.
@@ -63,11 +62,43 @@ __Background__
 5. Now, you can use this package to do the things you wish were easier to do.
 
 ## Usage
-__ls a directory in your Google Drive__
+__list contents of a directory in your Google Drive__: 
+ `colab_utils.ls_gdrive()`
+- The default behavior is to use the root directory of your Google Drive.
+  ```
+  In : colab_utils.ls_gdrive(drive)
+  Out: {'a_sample_folder': 'WWWWWWWWWWWWWWWWWWWWWWWWWWW',
+        'Colab Notebooks': 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
+        'Getting started': 'YYYYYYYYYYYYYYYYYYYYYYYYYYY',
+        'sample_nb.ipynb': 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZ'}
+  ```
+- If you want to list contents of a specific directory, supply its ID.
+  ```
+  In [1]: root_contents = colab_utils.ls_gdrive(drive)
+  In [2]: colab_utils.ls_gdrive(drive, root_contents['a_sample_folder'])
+  Out[2]: {'some_stuff': 'AAAAAAAAAAAAAAAAAAAAAAAAAAA',
+           'more_stuff': 'BBBBBBBBBBBBBBBBBBBBBBBBBBB'}
+  ```
 
-__Get the ID of a directory, file, or path in your Google Drive__
+__Get the ID of any directory, file, or path in your Google Drive__: 
+  `colab_utils.get_gdrive_id()`
+- Default behavior assumes the given path is relative to the root directory.
+  ```
+  In : colab_utils.get_gdrive_id(drive, 'a_sample_folder')
+  Out: 'WWWWWWWWWWWWWWWWWWWWWWWWWWW'
+  ```
+
+- If you would like to use a relative path, 
+   supply the ID of its parent directory.
+  ```
+  In [1]: parent_id = colab_utils.get_gdrive_id(drive, 'a_sample_folder')
+  In [2]: colab_utils.get_gdrive_id(drive, 'some_stuff', parent_id)
+  Out[2]: 'AAAAAAAAAAAAAAAAAAAAAAAAAAA'
+  ```
+- I suggest sticking with absolute file paths and directories to prevent 
+   your code from becoming bulky and unclear.
 
 
-__\"clone\"/download content from your Google Drive to your Colaboratory__
+__Download (i.e. \"clone\") from your Google Drive to your Colaboratory__
 
-__\"push\"/upload content from your Colaboratory to your Google Drive__
+__Upload (i.e. \"push\") from your Colaboratory to your Google Drive__
