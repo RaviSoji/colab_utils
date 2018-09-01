@@ -44,7 +44,6 @@ __Background__
     ```
 
 ## Usage
-
 1. Import this package and create your Google Drive object.
     ``` python
     import colab_utils
@@ -65,6 +64,41 @@ __Background__
 
 3. Now, you can use this package to do the things you wish were easier to do.
 
+## Upload (i.e. \"push\") from your Colaboratory to your Google Drive
+(1) Do whatever you would ordinarily do.
+(2) Pick a Google Drive directory and upload!
+
+``` python
+# Generate some random data for us to save.
+import numpy as np
+data = np.random.randint(0, 100, (10, 10))
+
+# Save data to colaboratory (The same way you would on a local machine).
+import os
+
+colaboratory_data_dir = os.path.join('.', 'data')
+os.mkdir(colaboratory_data_dir)
+
+fname = 'random_data.npy'
+colaboratory_save_path = os.path.join(colaboratory_data_dir, fname)
+np.save(colaboratory_save_path, data)
+
+# Upload your data to Google Drive.
+google_drive_save_dir = 'a_sample_folder'
+colab_utils.push_to_gdrive(drive,
+                           colaboratory_save_path, google_drive_save_dir)
+```
+
+## Download (i.e. \"pull\") from your Google Drive to your Colaboratory
+``` python
+import os
+
+fname = 'random_data.npy'
+google_drive_directory = 'a_sample_folder'
+google_drive_path = os.path.join(google_drive_directory, fname)
+
+colab_utils.pull_from_gdrive(drive, google_drive_path)  # saves to pwd.
+```
 ## List contents of a directory in your Google Drive
 - The default behavior is to use the root directory of your Google Drive.
   ```
@@ -99,40 +133,3 @@ __Background__
   ```
 - I find that sticking with absolute paths keeps things clear.
 
-## Upload (i.e. \"push\") from your Colaboratory to your Google Drive
-(1) Do whatever you would ordinarily do.
-(2) Then, pick a Google Drive directory and upload!
-
-``` python
-# Generate some random data for us to save.
-import numpy as np
-data = np.random.randint(0, 100, (10, 10))
-
-# Save data to colaboratory (The same way you would on a local machine).
-import os
-
-colaboratory_data_dir = os.path.join('.', 'data')
-os.mkdir(colaboratory_data_dir)
-
-fname = 'random_data.npy'
-colaboratory_save_path = os.path.join(colaboratory_data_dir, fname)
-np.save(colaboratory_save_path, data)
-
-# Upload your data to Google Drive.
-google_drive_save_dir = 'a_sample_folder'
-colab_utils.push_to_gdrive(drive,
-                           colaboratory_save_path, google_drive_save_dir)
-```
-
-## Download (i.e. \"pull\") from your Google Drive to your Colaboratory
-``` python
-import os
-
-fname = 'random_data.npy'
-google_drive_directory = 'a_sample_folder'
-google_drive_path = os.path.join(google_drive_directory, fname)
-
-colab_utils.pull_from_gdrive(drive, absolute_gdrive_path=google_drive_path)
-# saves to pwd.
-```
-- Alternatively, you can set the `gdrive_id` parameter instead.
