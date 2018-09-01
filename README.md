@@ -1,6 +1,6 @@
 # Utility functions for Google Colaboratory
 
-__Target Audience__:
+__Target Audience__
 - Users who want [Colab Notebooks + Google Drives] 
    to work like [Jupyter Notebooks + hard disks].
 - Users who don't have time to gamble on learning new APIs.
@@ -11,14 +11,14 @@ __Dependencies__
 - A [Colab notebook](https://colab.research.google.com/notebooks/welcome.ipynb#scrollTo=-Rh3-Vt9Nev9)
 
 __Background__
-1. Skim the \"Working with Python\" and \"System Aliases\" sections in 
-    [Colab Overview](https://colab.research.google.com/notebooks/basic_features_overview.ipynb).
+- Skim the \"Working with Python\" and \"System Aliases\" sections in 
+   [Colab Overview](https://colab.research.google.com/notebooks/basic_features_overview.ipynb).
 
-2. Do not conflate your Colaboratory and Google Drive directory structures.
+- Do not conflate your Colaboratory and Google Drive directory structures.
    They are separate from one another.
 
-3. Life will be easier if you stick with tracking absolute paths 
-    in your Google Drive and Colaboratory.
+- Life will be easier if you stick with tracking absolute paths 
+   in your Google Drive and Colaboratory.
 
 ## Setup and Installation
 1. Open your __Colab__ notebook. 
@@ -34,7 +34,7 @@ __Background__
 
 3. Clone this package by running the following in a Colab notebook cell.
     ```
-    !git clone https://github.com/RaviSoji/colab_utils.git  # Don't forget "!".
+    !git clone https://github.com/RaviSoji/colab_utils.git  # Include the "!".
     ```
 
 ## Usage
@@ -58,12 +58,12 @@ __Background__
 
 3. Now, you can use this package to do the things you wish were easier to do.
 
-## Upload (i.e. \"push\") from your Colaboratory to your Google Drive
+## Upload (i.e. \"push\") files from your Colaboratory to your Google Drive
 ``` python
 colab_utils.push_to_gdrive(drive, colaboratory_path, google_drive_directory)
 ```
 
-## Download (i.e. \"pull\") from your Google Drive to your Colaboratory
+## Download (i.e. \"pull\") files from your Google Drive to your Colaboratory
 ``` python
 colab_utils.pull_from_gdrive(drive, google_drive_path, colaboratory_directory)
 ```
@@ -89,7 +89,7 @@ colab_utils.pull_from_gdrive(drive, google_drive_path, colaboratory_directory)
    where the keys are filenames in the directory and 
    the values are IDs unique to each of those files.
 
-## Get the Google Drive ID of a directory, file, or path in your Google Drive.
+## Get the Google Drive ID of a directory or file path in your Google Drive.
 - Default behavior assumes the given path is relative to the root directory.
   ```
   In [1]: colab_utils.get_gdrive_id(drive, 'a_sample_folder/some_stuff')
