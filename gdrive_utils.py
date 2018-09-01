@@ -92,9 +92,9 @@ def push_to_gdrive(gdrive, fpath_to_upload, gdrive_save_directory_id):
     return gdrive_file
 
 
-def clone_from_gdrive(gdrive, gdrive_id):
+def pull_from_gdrive(gdrive, gdrive_id):
     """ Downloads content from Google Colaboratory to Google Drive. """
-    gdrive_file = drive.CreateFile({'id': tmp_saved['id']})
+    gdrive_file = gdrive.CreateFile({'id': tmp_saved['id']})
     gdrive_file.GetContentFile(tmp_loaded['title'])
 
     return gdrive_file
