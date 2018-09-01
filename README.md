@@ -51,7 +51,7 @@ __Background__
     drive = colab_utils.get_gdrive()
     ```
 
-    - Running this should display something like the following:
+    - Running this should display something like the following.
        ```
        Go to the following link in your browser:
        https://accounts.google.com/o/oauth2/auth?redirectXXXXXXXXXXXXXXXXX
@@ -74,7 +74,8 @@ __Background__
            'Getting started': 'YYYYYYYYYYYYYYYYYYYYYYYYYYY',
            'sample_nb.ipynb': 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZ'}
   ```
-- If you want to list contents of a specific directory, supply its ID.
+- If you want to list contents of a specific directory, 
+   supply its Google Drive ID.
   ```
   In [1]: root_contents = colab_utils.ls_gdrive(drive)
   In [2]: colab_utils.ls_gdrive(drive, root_contents['a_sample_folder'])
@@ -98,8 +99,8 @@ __Background__
   ```
 - I find that sticking with absolute paths promotes code clarity.
 
-## Download (i.e. \"clone\") from your Google Drive to your Colaboratory
-```
+## Upload (i.e. \"push\") from your Colaboratory to your Google Drive
+``` python
 # Generate some random data for us to save.
 import numpy as np
 data = np.random.randint(0, 100, (10, 10))
@@ -120,4 +121,4 @@ colab_utils.push_to_gdrive(drive,
                            google_drive_save_dir_id)
 ```
 
-## Upload (i.e. \"push\") from your Colaboratory to your Google Drive
+## Download (i.e. \"clone\") from your Google Drive to your Colaboratory
