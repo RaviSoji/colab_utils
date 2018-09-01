@@ -3,7 +3,7 @@
 __Target Audience__
 - Wants [Colab Notebooks + Google Drives] 
    to work more like [Jupyter Notebooks + hard disks].
-- Don't have time to gamble on learning new APIs.
+- Doesn't have time to gamble on learning new APIs.
 - Experienced with writing Python code to manage data and train models.
 
 __Dependencies__
