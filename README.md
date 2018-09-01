@@ -9,17 +9,13 @@ __Target Audience__:
 
 __Dependencies__
 - A [Google account](https://accounts.google.com/signup)
-- A [Colab notebook](https://colab.research.google.com/
-                     notebooks/welcome.ipynb#scrollTo=-Rh3-Vt9Nev9)
-__Background__
-1. Take a quick look at the 
-    [Colab Overview](https://colab.research.google.com/
-                     notebooks/basic_features_overview.ipynb).
-   - If you are comfortable with Jupyter notebooks, 
-      just learn how to run python and shell commands 
-      (i.e. skim the \"Working with Python\" and \"System Aliases\" sections).
+- A [Colab notebook](https://colab.research.google.com/notebooks/welcome.ipynb#scrollTo=-Rh3-Vt9Nev9)
 
-2. All files and folders on your Google Drive have two important attributes: 
+__Background__
+1. Skim the \"Working with Python\" and \"System Aliases\" sections in 
+    [Colab Overview](https://colab.research.google.com/notebooks/basic_features_overview.ipynb).
+
+2. All files and folders on your Google Drive have two important attributes.
    - `'title'`: this is what we typically call the `filename` or `basename`.
    - `'id'`: a unique ID for a specific file or folder. 
       In order to download anything from Google Drive to the Colab notebook, 
@@ -29,10 +25,10 @@ __Background__
       This package also makes getting this information easy.
 
 ## Usage: Download and Import
-1. Open your Colab notebook. 
-   __None__ of the following code will run in IPython or Jupyter notebook.
+1. Open your __Colab__ notebook. 
+   None of the following code will run in IPython or Jupyter notebook.
 
-2. Set the Runetime type for your notebook.
+2. Set the `Runtime type` for your notebook.
     - At the top of the page, click `Runtime`. 
     - Then, in the drop-down menu, click `Change runtime type`.
     - Set `Runtime type` to `Python 3`.
@@ -46,8 +42,7 @@ __Background__
     import colab_utils
     ```
 
-3. Create your Google Drive object and then authenticate it by copy and pasting 
-    the key provided by the link in the prompt (remember to press enter).
+3. Create your Google Drive object.
     ``` python
     drive = colab_utils.get_gdrive()
     ```
@@ -61,8 +56,9 @@ __Background__
        Enter verification code: ___________________
        ```
 4. Authenticate your Google Drive object by clicking the link,
-    accepting the privacy contract, copying the displayed code, 
+    supplying consent, copying the displayed code, 
     and pasting into the `verification code` field.
+   Remember to press `<enter>` on your keyboard.
 
 5. Now, you can use this package to do the things you wish were easier to do.
 
