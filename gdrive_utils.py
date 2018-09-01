@@ -126,8 +126,7 @@ def pull_from_gdrive(gdrive, absolute_gdrive_path=None,
         assert absolute_gdrive_path_id is None
         absolute_gdrive_path_id = get_gdrive_id(gdrive, absolute_gdrive_path)
 
-    else:
-        assert absolute_gdrive_path_id is not None
+    assert absolute_gdrive_path_id is not None
 
     gdrive_file = gdrive.CreateFile({'id': absolute_gdrive_path_id})
     gdrive_file.GetContentFile(gdrive_file['title'])
