@@ -85,11 +85,11 @@ colab_utils.pull_from_gdrive(drive, google_drive_path, colaboratory_directory)
   Out[2]: {'some_stuff': 'AAAAAAAAAAAAAAAAAAAAAAAAAAA',
            'more_stuff': 'BBBBBBBBBBBBBBBBBBBBBBBBBBB'}
   ```
-- The out put is a dictionary, 
+- The output is a dictionary, 
    where the keys are filenames in the directory and 
-   the values are IDs unique to each file or folder in your Google Drive.
+   the values are IDs unique to each of those files.
 
-## Get the Google Drie ID of any directory, file, or path in your Google Drive.
+## Get the Google Drive ID of a directory, file, or path in your Google Drive.
 - Default behavior assumes the given path is relative to the root directory.
   ```
   In [1]: colab_utils.get_gdrive_id(drive, 'a_sample_folder/some_stuff')
