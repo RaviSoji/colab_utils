@@ -51,7 +51,6 @@ def ls_gdrive(gdrive, gdrive_directory_id=None):
 def get_gdrive_id(gdrive, gdrive_fpath, gdrive_parent_directory_id=None):
     """ Finds the ID of a file. """
     fpath_parts = Path(gdrive_fpath).parts
-    assert len(fpath_parts) > 1
 
     if fpath_parts[0] == os.sep:
         fpath_parts = fpath_parts[1:]
@@ -66,6 +65,9 @@ def get_gdrive_id(gdrive, gdrive_fpath, gdrive_parent_directory_id=None):
         return current_ls_dict[fpath_parts[0]]
 
     else:
+        assert type(fpath_parts) == tuple
+        assert len(fpath_parts) > 1
+
         for part in fpath_parts[:-1]:
             gdrive_parent_directory_id = current_ls_dict[part]
             current_ls_dict = ls_gdrive(gdrive, gdrive_parent_directory_id)
@@ -81,7 +83,6 @@ def push_to_gdrive(gdrive, fpath_to_upload, gdrive_save_directory_id):
     gdrive_file = gdrive.CreateFile(createfile_arg)
     gdrive_file.SetContentFile(fpath_to_upload)
     gdrive_file['title'] = os.path.basename(fpath_to_upload)
-    print(gdrive_file['title'])
     gdrive_file.Upload()
 
     # print(gdrive_file['id'])
