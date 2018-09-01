@@ -103,7 +103,8 @@ def push_to_gdrive(gdrive, fpath_to_upload,
     return gdrive_file
 
 
-def pull_from_gdrive(gdrive, absolute_gdrive_path=None, absolute_gdrive_path_id=None):
+def pull_from_gdrive(gdrive, absolute_gdrive_path=None,
+                     absolute_gdrive_path_id=None):
     """ Downloads content from Google Colaboratory to Google Drive. """
     if absolute_gdrive_path is not None:
         assert absolute_gdrive_path_id is None

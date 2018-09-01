@@ -120,11 +120,8 @@ np.save(colaboratory_save_path, data)
 
 # Upload your data to Google Drive.
 google_drive_save_dir = 'a_sample_folder'
-google_drive_save_dir_id = colab_utils.get_gdrive_id(drive,
-                                                     google_drive_save_dir)
 colab_utils.push_to_gdrive(drive,
-                           colaboratory_save_path,
-                           google_drive_save_dir_id)
+                           colaboratory_save_path, google_drive_save_dir)
 ```
 
 ## Download (i.e. \"pull\") from your Google Drive to your Colaboratory
@@ -135,5 +132,7 @@ fname = 'random_data.npy'
 google_drive_directory = 'a_sample_folder'
 google_drive_path = os.path.join(google_drive_directory, fname)
 
-colab_utils.pull_from_gdrive(drive, google_drive_path)  # saves to pwd.
+colab_utils.pull_from_gdrive(drive, absolute_gdrive_path=google_drive_path)
+# saves to pwd.
 ```
+- Alternatively, you can set the `gdrive_id` parameter instead.
