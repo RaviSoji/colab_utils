@@ -24,7 +24,7 @@ __Background__
        Google Drive, each is assigned a unique ID as well.
       This package also makes getting this information easy.
 
-## Usage: Download and Import
+## Installation
 1. Open your __Colab__ notebook. 
    None of the following code will run in IPython or Jupyter notebook.
 
@@ -36,13 +36,15 @@ __Background__
        set `Hardware accelerator` to `GPU`.
     - Click `Save`.
 
-2. Clone and import this package by running the following.
+## Usage
+
+1. Clone and import this package by running the following.
     ```
     !git clone https://github.com/RaviSoji/colab_utils.git  # Don't forget "!".
     import colab_utils
     ```
 
-3. Create your Google Drive object.
+2. Create your Google Drive object.
     ``` python
     drive = colab_utils.get_gdrive()
     ```
@@ -54,23 +56,21 @@ __Background__
        Enter verification code: ___________________
        ```
 
-4. Authenticate your Google Drive object by clicking the link,
+3. Authenticate your Google Drive object by clicking the link,
     supplying consent, copying the displayed code, 
     and pasting into the `verification code` field.
    Remember to press `<enter>` on your keyboard.
 
-5. Now, you can use this package to do the things you wish were easier to do.
+4. Now, you can use this package to do the things you wish were easier to do.
 
-## Usage
-__list contents of a directory in your Google Drive__: 
- `colab_utils.ls_gdrive()`
+### list contents of a directory in your Google Drive: 
 - The default behavior is to use the root directory of your Google Drive.
   ```
-  In : colab_utils.ls_gdrive(drive)
-  Out: {'a_sample_folder': 'WWWWWWWWWWWWWWWWWWWWWWWWWWW',
-        'Colab Notebooks': 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
-        'Getting started': 'YYYYYYYYYYYYYYYYYYYYYYYYYYY',
-        'sample_nb.ipynb': 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZ'}
+  In [1]: colab_utils.ls_gdrive(drive)
+  Out[1]: {'a_sample_folder': 'WWWWWWWWWWWWWWWWWWWWWWWWWWW',
+           'Colab Notebooks': 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
+           'Getting started': 'YYYYYYYYYYYYYYYYYYYYYYYYYYY',
+           'sample_nb.ipynb': 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZ'}
   ```
 - If you want to list contents of a specific directory, supply its ID.
   ```
@@ -80,8 +80,7 @@ __list contents of a directory in your Google Drive__:
            'more_stuff': 'BBBBBBBBBBBBBBBBBBBBBBBBBBB'}
   ```
 
-__Get the ID of any directory, file, or path in your Google Drive__: 
-  `colab_utils.get_gdrive_id()`
+### Get the ID of any directory, file, or path in your Google Drive
 - Default behavior assumes the given path is relative to the root directory.
   ```
   In : colab_utils.get_gdrive_id(drive, 'a_sample_folder')
@@ -99,6 +98,6 @@ __Get the ID of any directory, file, or path in your Google Drive__:
    your code from becoming bulky and unclear.
 
 
-__Download (i.e. \"clone\") from your Google Drive to your Colaboratory__
+### Download (i.e. \"clone\") from your Google Drive to your Colaboratory
 
-__Upload (i.e. \"push\") from your Colaboratory to your Google Drive__
+### Upload (i.e. \"push\") from your Colaboratory to your Google Drive
