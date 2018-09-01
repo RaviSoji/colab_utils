@@ -97,23 +97,29 @@ __Background__
   In [2]: colab_utils.get_gdrive_id(drive, 'more_stuff', parent_id)
   Out[2]: 'BBBBBBBBBBBBBBBBBBBBBBBBBBB'
   ```
-- I find that sticking with absolute paths promotes code clarity.
+- I find that sticking with absolute paths keeps things clear.
 
 ## Upload (i.e. \"push\") from your Colaboratory to your Google Drive
+(1) Do whatever you would ordinarily do.
+(2) Then, pick a Google Drive directory and upload!
+
 ``` python
 # Generate some random data for us to save.
 import numpy as np
 data = np.random.randint(0, 100, (10, 10))
 
-# Save data to colaboratory.
+# Save data to colaboratory (The same way you would on a local machine).
 import os
+
 colaboratory_data_dir = os.path.join('.', 'data')
 os.mkdir(colaboratory_data_dir)
-colaboratory_save_path = os.path.join(colaboratory_data_dir, 'random_data.npy')
+
+fname = 'random_data.npy'
+colaboratory_save_path = os.path.join(colaboratory_data_dir, fname)
 np.save(colaboratory_save_path, data)
 
-# Upload data to Google Drive.
-google_drive_save_dir = os.path.join('a_sample_folder')
+# Upload your data to Google Drive.
+google_drive_save_dir = 'a_sample_folder'
 google_drive_save_dir_id = colab_utils.get_gdrive_id(drive,
                                                      google_drive_save_dir)
 colab_utils.push_to_gdrive(drive,
@@ -121,4 +127,13 @@ colab_utils.push_to_gdrive(drive,
                            google_drive_save_dir_id)
 ```
 
-## Download (i.e. \"clone\") from your Google Drive to your Colaboratory
+## Download (i.e. \"pull\") from your Google Drive to your Colaboratory
+``` python
+import os
+
+fname = 'random_data.npy'
+google_drive_directory = 'a_sample_folder'
+google_drive_path = os.path.join(google_drive_directory, fname)
+
+colab_utils.pull_from_gdrive(drive, google_drive_path)  # saves to pwd.
+```
