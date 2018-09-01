@@ -2,8 +2,7 @@
 
 __Target Audience__:
 - Users who want [Colab Notebooks + Google Drives] 
-   to work like [Jupyter Notebooks + hard disks] 
-   on their local machines, without having to learn more APIs.
+   to work like [Jupyter Notebooks + hard disks] on their local machines.
 - Experienced with writing Python code to manage data and train models.
 - Familiar with Jupyter and/or Colaboratory notebooks.
 
@@ -24,7 +23,10 @@ __Background__
        Google Drive, each is assigned a unique ID as well.
       This package also makes getting this information easy.
 
-## Installation
+3. Do not conflate your Colaboratory and Google Drive directory structures.
+   They are separate from one another.
+
+## Setup and Installation
 1. Open your __Colab__ notebook. 
    None of the following code will run in IPython or Jupyter notebook.
 
@@ -36,16 +38,16 @@ __Background__
        set `Hardware accelerator` to `GPU`.
     - Click `Save`.
 
-## Usage
-
-1. Clone and import this package by running the following.
+3. Clone this package by running the following in a Colab notebook cell.
     ```
     !git clone https://github.com/RaviSoji/colab_utils.git  # Don't forget "!".
-    import colab_utils
     ```
 
-2. Create your Google Drive object.
+## Usage
+
+1. Import this package and create your Google Drive object.
     ``` python
+    import colab_utils
     drive = colab_utils.get_gdrive()
     ```
 
@@ -56,14 +58,14 @@ __Background__
        Enter verification code: ___________________
        ```
 
-3. Authenticate your Google Drive object by clicking the link,
+2. Authenticate your Google Drive object by clicking the link,
     supplying consent, copying the displayed code, 
     and pasting into the `verification code` field.
    Remember to press `<enter>` on your keyboard.
 
-4. Now, you can use this package to do the things you wish were easier to do.
+3. Now, you can use this package to do the things you wish were easier to do.
 
-### list contents of a directory in your Google Drive: 
+## List contents of a directory in your Google Drive
 - The default behavior is to use the root directory of your Google Drive.
   ```
   In [1]: colab_utils.ls_gdrive(drive)
@@ -80,24 +82,42 @@ __Background__
            'more_stuff': 'BBBBBBBBBBBBBBBBBBBBBBBBBBB'}
   ```
 
-### Get the ID of any directory, file, or path in your Google Drive
+## Get the ID of any directory, file, or path in your Google Drive
 - Default behavior assumes the given path is relative to the root directory.
   ```
-  In : colab_utils.get_gdrive_id(drive, 'a_sample_folder')
-  Out: 'WWWWWWWWWWWWWWWWWWWWWWWWWWW'
+  In [1]: colab_utils.get_gdrive_id(drive, 'a_sample_folder/some_stuff')
+  Out[1]: 'AAAAAAAAAAAAAAAAAAAAAAAAAAA'
   ```
 
 - If you would like to use a relative path, 
    supply the ID of its parent directory.
   ```
   In [1]: parent_id = colab_utils.get_gdrive_id(drive, 'a_sample_folder')
-  In [2]: colab_utils.get_gdrive_id(drive, 'some_stuff', parent_id)
-  Out[2]: 'AAAAAAAAAAAAAAAAAAAAAAAAAAA'
+  In [2]: colab_utils.get_gdrive_id(drive, 'more_stuff', parent_id)
+  Out[2]: 'BBBBBBBBBBBBBBBBBBBBBBBBBBB'
   ```
-- I suggest sticking with absolute file paths and directories to prevent 
-   your code from becoming bulky and unclear.
+- I find that sticking with absolute paths promotes code clarity.
 
+## Download (i.e. \"clone\") from your Google Drive to your Colaboratory
+```
+# Generate some random data for us to save.
+import numpy as np
+data = np.random.randint(0, 100, (10, 10))
 
-### Download (i.e. \"clone\") from your Google Drive to your Colaboratory
+# Save data to colaboratory.
+import os
+colaboratory_data_dir = os.path.join('.', 'data')
+os.mkdir(colaboratory_data_dir)
+colaboratory_save_path = os.path.join(colaboratory_data_dir, 'random_data.npy')
+np.save(colaboratory_save_path, data)
 
-### Upload (i.e. \"push\") from your Colaboratory to your Google Drive
+# Upload data to Google Drive.
+google_drive_save_dir = os.path.join('a_sample_folder')
+google_drive_save_dir_id = colab_utils.get_gdrive_id(drive,
+                                                     google_drive_save_dir)
+colab_utils.push_to_gdrive(drive,
+                           colaboratory_save_path,
+                           google_drive_save_dir_id)
+```
+
+## Upload (i.e. \"push\") from your Colaboratory to your Google Drive

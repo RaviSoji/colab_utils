@@ -28,6 +28,7 @@ def get_gdrive():
 
 
 def ls_gdrive(gdrive, gdrive_directory_id=None):
+    """ Lists content in a Google Drive directory. """
     gnarly_string = "'{}' in parents and trashed=false"
 
     if gdrive_directory_id is None:
@@ -48,7 +49,9 @@ def ls_gdrive(gdrive, gdrive_directory_id=None):
 
 
 def get_gdrive_id(gdrive, gdrive_fpath, gdrive_parent_directory_id=None):
+    """ Finds the ID of a file. """
     fpath_parts = Path(gdrive_fpath).parts
+    assert len(fpath_parts) > 1
 
     if fpath_parts[0] == os.sep:
         fpath_parts = fpath_parts[1:]
@@ -73,19 +76,22 @@ def get_gdrive_id(gdrive, gdrive_fpath, gdrive_parent_directory_id=None):
 
 
 def push_to_gdrive(gdrive, fpath_to_upload, gdrive_save_directory_id):
+    """ Uploads content to Google Drive from Google Colaboratory. """
     createfile_arg = {'parents': [{'id': gdrive_save_directory_id}]}
     gdrive_file = gdrive.CreateFile(createfile_arg)
     gdrive_file.SetContentFile(fpath_to_upload)
+    gdrive_file['title'] = os.path.basename(fpath_to_upload)
     gdrive_file.Upload()
 
-    # print(file['id'])
-    # print(file['title'])
-    # print(file['parents'])
+    # print(gdrive_file['id'])
+    # print(gdrive_file['title'])
+    # print(gdrive_file['parents'])
 
     return gdrive_file
 
 
 def clone_from_gdrive(gdrive, gdrive_id):
+    """ Downloads content from Google Colaboratory to Google Drive. """
     gdrive_file = drive.CreateFile({'id': tmp_saved['id']})
     gdrive_file.GetContentFile(tmp_loaded['title'])
 
