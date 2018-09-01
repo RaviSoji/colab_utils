@@ -77,9 +77,20 @@ def get_gdrive_id(gdrive, gdrive_fpath, gdrive_parent_directory_id=None):
         return current_ls_dict[last_part]
 
 
-def push_to_gdrive(gdrive, fpath_to_upload, gdrive_save_directory_id):
+def push_to_gdrive(gdrive, fpath_to_upload,
+                   gdrive_absolute_save_directory=None,
+                   gdrive_absolute_save_directory_id=None):
     """ Uploads content to Google Drive from Google Colaboratory. """
-    createfile_arg = {'parents': [{'id': gdrive_save_directory_id}]}
+    if gdrive_absolute_save_directory is not None:
+        assert gdrive_absolute_save_directory_id is None
+
+        args = (gdrive, gdrive_absolute_save_directory)
+        gdrive_absolute_save_directory_id = get_gdrive_id(*args)
+
+    else:
+        assert gdrive_absolute_save_directory_id is not None
+
+    createfile_arg = {'parents': [{'id': gdrive_absolute_save_directory_id}]}
     gdrive_file = gdrive.CreateFile(createfile_arg)
     gdrive_file.SetContentFile(fpath_to_upload)
     gdrive_file['title'] = os.path.basename(fpath_to_upload)
@@ -99,8 +110,7 @@ def pull_from_gdrive(gdrive, absolute_gdrive_path=None, gdrive_id=None):
         gdrive_id = get_gdrive_id(gdrive, absolute_gdrive_path)
 
     else:
-        assert gdrive is not None
-        
+        assert gdrive_id is not None
 
     gdrive_file = gdrive.CreateFile({'id': gdrive_id})
     gdrive_file.GetContentFile(gdrive_file['title'])
