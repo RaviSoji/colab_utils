@@ -103,16 +103,16 @@ def push_to_gdrive(gdrive, fpath_to_upload,
     return gdrive_file
 
 
-def pull_from_gdrive(gdrive, absolute_gdrive_path=None, gdrive_id=None):
+def pull_from_gdrive(gdrive, absolute_gdrive_path=None, absolute_gdrive_path_id=None):
     """ Downloads content from Google Colaboratory to Google Drive. """
     if absolute_gdrive_path is not None:
-        assert gdrive_id is None
-        gdrive_id = get_gdrive_id(gdrive, absolute_gdrive_path)
+        assert absolute_gdrive_path_id is None
+        absolute_gdrive_path_id = get_gdrive_id(gdrive, absolute_gdrive_path)
 
     else:
-        assert gdrive_id is not None
+        assert absolute_gdrive_path_id is not None
 
-    gdrive_file = gdrive.CreateFile({'id': gdrive_id})
+    gdrive_file = gdrive.CreateFile({'id': absolute_gdrive_path_id})
     gdrive_file.GetContentFile(gdrive_file['title'])
 
     return gdrive_file
