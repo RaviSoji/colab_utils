@@ -81,6 +81,7 @@ def push_to_gdrive(gdrive, fpath_to_upload, gdrive_save_directory_id):
     gdrive_file = gdrive.CreateFile(createfile_arg)
     gdrive_file.SetContentFile(fpath_to_upload)
     gdrive_file['title'] = os.path.basename(fpath_to_upload)
+    print(gdrive_file['title'])
     gdrive_file.Upload()
 
     # print(gdrive_file['id'])
