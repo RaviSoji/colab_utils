@@ -34,13 +34,13 @@ def ls_gdrive(gdrive, gdrive_directory_id=None):
         gdrive_directory_id = 'root'
 
     listfile_arg = {'q': gnarly_string.format(gdrive_directory_id)}
-    files = gdrive.ListFile(listfile_arg)
+    gdrive_files = gdrive.ListFile(listfile_arg)
 
     title_to_id_dict = dict()
 
-    for file in files.GetList():
-        key = file['title']
-        value = file['id']
+    for gdrive_file in gdrive_files.GetList():
+        key = gdrive_file['title']
+        value = gdrive_file['id']
 
         title_to_id_dict[key] = value
 
@@ -73,15 +73,16 @@ def get_gdrive_id(gdrive, gdrive_fpath, gdrive_parent_directory_id=None):
 
 
 def push_to_gdrive(gdrive, fpath_to_upload, gdrive_save_directory_id):
-    file = gdrive.CreateFile({'parents': [{'id': gdrive_save_directory_id}]})
-    file.SetContentFile(fpath_to_upload)
-    file.Upload()
+    createfile_arg = {'parents': [{'id': gdrive_save_directory_id}]}
+    gdrive_file = gdrive.CreateFile(createfile_arg)
+    gdrive_file.SetContentFile(fpath_to_upload)
+    gdrive_file.Upload()
 
     # print(file['id'])
     # print(file['title'])
     # print(file['parents'])
 
-    return file
+    return gdrive_file
 
 
 def clone_from_gdrive(gdrive, gdrive_id):
