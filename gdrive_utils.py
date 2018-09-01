@@ -118,7 +118,7 @@ def pull_from_gdrive(gdrive, absolute_gdrive_path=None,
     gdrive_file = gdrive.CreateFile({'id': absolute_gdrive_path_id})
     gdrive_file.GetContentFile(gdrive_file['title'])
 
-    if colaboratory_save_directory is None:
+    if colaboratory_save_directory is not None:
         shutil.move(gdrive_file['title'], colaboratory_save_directory)
 
     return gdrive_file
