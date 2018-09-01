@@ -96,7 +96,7 @@ def pull_from_gdrive(gdrive, absolute_gdrive_path=None, gdrive_id=None):
     """ Downloads content from Google Colaboratory to Google Drive. """
     if absolute_gdrive_path is not None:
         assert gdrive_id is None
-        gdrive_id = get_gdrive_id(drive, absolute_gdrive_path)
+        gdrive_id = get_gdrive_id(gdrive, absolute_gdrive_path)
 
     else:
         assert gdrive is not None
