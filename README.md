@@ -1,9 +1,9 @@
 # Utility functions for Google Colaboratory
 
 __Target Audience__
-- Users who want [Colab Notebooks + Google Drives] 
+- Wants [Colab Notebooks + Google Drives] 
    to work more like [Jupyter Notebooks + hard disks].
-- Users who don't have time to gamble on learning new APIs.
+- Don't have time to gamble on learning new APIs.
 - Experienced with writing Python code to manage data and train models.
 
 __Dependencies__
