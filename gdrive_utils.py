@@ -1,6 +1,7 @@
 import os
 
 from pathlib import Path
+import shutil
 from subprocess import call
 
 
@@ -104,7 +105,8 @@ def push_to_gdrive(gdrive, fpath_to_upload,
 
 
 def pull_from_gdrive(gdrive, absolute_gdrive_path=None,
-                     absolute_gdrive_path_id=None):
+                     absolute_gdrive_path_id=None,
+                     colaboratory_save_directory=None):
     """ Downloads content from Google Colaboratory to Google Drive. """
     if absolute_gdrive_path is not None:
         assert absolute_gdrive_path_id is None
@@ -115,5 +117,6 @@ def pull_from_gdrive(gdrive, absolute_gdrive_path=None,
 
     gdrive_file = gdrive.CreateFile({'id': absolute_gdrive_path_id})
     gdrive_file.GetContentFile(gdrive_file['title'])
+    shutil.move(gdrive_file['title'], colaboratory_save_directory)
 
     return gdrive_file
