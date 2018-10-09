@@ -8,12 +8,6 @@ __Background__
 - Skim the \"Working with Python\" and \"System Aliases\" sections in 
    [Colab Overview](https://colab.research.google.com/notebooks/basic_features_overview.ipynb).
 
-- Do not conflate your Colaboratory and Google Drive directory structures.
-   They are separate from one another.
-
-- Life will be easier if you stick with tracking absolute paths 
-   in your Google Drive and Colaboratory.
-
 ## Setup and Installation
 1. Open your __Colab__ notebook. 
    None of the following code will run in IPython or Jupyter notebook.
